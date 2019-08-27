@@ -24,7 +24,7 @@
   "prefer-stable": true,
   "require": {
     "php": ">=7.1",
-    "fond-of-spryker/country": "~1.0.0 || ~1.1",
+    "fond-of-spryker/country": "dev-master",
     "spryker/shipment": "^6.5.0"
 
   },

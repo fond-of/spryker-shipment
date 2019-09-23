@@ -25,7 +25,7 @@
   "require": {
     "php": ">=7.1",
     "fond-of-spryker/country": "dev-spryker_upgrade",
-    "spryker/shipment": "^6.10.0"
+    "spryker/shipment": "^7.0.0"
 
   },
   "require-dev": {

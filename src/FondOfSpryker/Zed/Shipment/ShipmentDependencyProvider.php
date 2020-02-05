@@ -7,7 +7,7 @@ use Spryker\Zed\Shipment\ShipmentDependencyProvider as SprykerShipmentDependency
 
 class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
 {
-    const FACADE_COUNTRY = 'facade_country';
+    public const FACADE_COUNTRY = 'facade_country';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container

@@ -2,21 +2,23 @@
 
 namespace FondOfSpryker\Zed\Shipment;
 
+use FondOfSpryker\Zed\Shipment\Dependency\Facade\ShipmentToCountryFacadeBridge;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Shipment\ShipmentDependencyProvider as SprykerShipmentDependencyProvider;
 
 class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
 {
-    const FACADE_COUNTRY = 'facade_country';
+    public const FACADE_COUNTRY = 'FACADE_COUNTRY';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function provideBusinessLayerDependencies(Container $container)
+    public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
+
         $container = $this->addCountryFacade($container);
 
         return $container;
@@ -27,10 +29,10 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addCountryFacade(Container $container)
+    protected function addCountryFacade(Container $container): Container
     {
-        $container[static::FACADE_COUNTRY] = function (Container $container) {
-            return $container->getLocator()->country()->facade();
+        $container[static::FACADE_COUNTRY] = static function (Container $container) {
+            return new ShipmentToCountryFacadeBridge($container->getLocator()->country()->facade());
         };
 
         return $container;

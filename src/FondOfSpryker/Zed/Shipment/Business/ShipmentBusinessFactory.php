@@ -19,6 +19,7 @@ class ShipmentBusinessFactory extends SprykerShipmentBusinessFactory
         return new ShipmentTaxRateCalculator(
             $this->getQueryContainer(),
             $this->getTaxFacade(),
+            $this->getShipmentService(),
             $this->getCountryFacade()
         );
     }

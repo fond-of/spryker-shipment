@@ -5,6 +5,7 @@ namespace FondOfSpryker\Zed\Shipment\Business\Model;
 use FondOfSpryker\Zed\Country\Business\CountryFacadeInterface;
 use FondOfSpryker\Zed\Shipment\Persistence\ShipmentQueryContainerInterface;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Service\Shipment\ShipmentServiceInterface;
 use Spryker\Zed\Shipment\Business\Model\ShipmentTaxRateCalculator as SprykerShipmentTaxRateCalculator;
 use Spryker\Zed\Shipment\Dependency\ShipmentToTaxInterface;
 
@@ -23,8 +24,10 @@ class ShipmentTaxRateCalculator extends SprykerShipmentTaxRateCalculator
     public function __construct(
         ShipmentQueryContainerInterface $shipmentQueryContainer,
         ShipmentToTaxInterface $taxFacade,
+        ShipmentServiceInterface $shipmentService,
         CountryFacadeInterface $countryFacade
     ) {
+        parent::__construct($shipmentQueryContainer, $taxFacade, $shipmentService);
         $this->countryFacade = $countryFacade;
         $this->shipmentQueryContainer = $shipmentQueryContainer;
         $this->taxFacade = $taxFacade;

@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\Shipment\Business;
 
+use FondOfSpryker\Zed\Shipment\Business\Model\AddEmptyShipmentTransferToItem;
 use FondOfSpryker\Zed\Shipment\Business\Model\ShipmentTaxRateCalculator;
 use FondOfSpryker\Zed\Shipment\ShipmentDependencyProvider;
 use Spryker\Zed\Shipment\Business\ShipmentBusinessFactory as SprykerShipmentBusinessFactory;
@@ -17,11 +18,20 @@ class ShipmentBusinessFactory extends SprykerShipmentBusinessFactory
     public function createShipmentTaxCalculator()
     {
         return new ShipmentTaxRateCalculator(
+            $this->getRepository(),
             $this->getQueryContainer(),
             $this->getTaxFacade(),
             $this->getShipmentService(),
             $this->getCountryFacade()
         );
+    }
+
+    /**
+     * @return \FondOfSpryker\Zed\Shipment\Business\Model\AddEmptyShipmentTransferToItem
+     */
+    public function createAddEmptyShipmentTransferToItem(): AddEmptyShipmentTransferToItem
+    {
+        return new AddEmptyShipmentTransferToItem();
     }
 
     /**

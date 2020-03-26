@@ -7,11 +7,12 @@ use Spryker\Shared\Shipment\ShipmentConfig as SprykerShipmentConfig;
 class ShipmentConfig extends SprykerShipmentConfig
 {
     public const DEFAULT_SHIPMENT_METHOD_ID = 'DEFAULT_SHIPMENT_METHOD_ID';
-
     public const DEFAULT_MODULE_SHIPMENT_METHOD_ID = 1;
-
+    /**
+     * @return int
+     */
     public function getDefaultShipmentMethodId(): int
     {
-        return $this->get(self::DEFAULT_SHIPMENT_METHOD_ID, self::DEFAULT_MODULE_SHIPMENT_METHOD_ID);
+        return $this->get(static::DEFAULT_SHIPMENT_METHOD_ID, static::DEFAULT_MODULE_SHIPMENT_METHOD_ID);
     }
 }

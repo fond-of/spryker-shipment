@@ -2,14 +2,13 @@
 
 namespace FondOfSpryker\Zed\Shipment\Business\Model;
 
-use FondOfSpryker\Zed\Country\Business\CountryFacadeInterface;
-use FondOfSpryker\Zed\Shipment\Persistence\ShipmentQueryContainerInterface;
-use Generated\Shared\Transfer\QuoteTransfer;
+use FondOfSpryker\Zed\Shipment\Dependency\Facade\ShipmentToCountryFacadeInterface;
 use Generated\Shared\Transfer\ShipmentTransfer;
 use Generated\Shared\Transfer\TaxSetTransfer;
 use Spryker\Service\Shipment\ShipmentServiceInterface;
 use Spryker\Zed\Shipment\Business\Calculator\ShipmentTaxRateCalculator as SprykerShipmentTaxRateCalculator;
 use Spryker\Zed\Shipment\Dependency\ShipmentToTaxInterface;
+use Spryker\Zed\Shipment\Persistence\ShipmentQueryContainerInterface;
 use Spryker\Zed\Shipment\Persistence\ShipmentRepositoryInterface;
 
 class ShipmentTaxRateCalculator extends SprykerShipmentTaxRateCalculator

@@ -2,35 +2,38 @@
 
 namespace FondOfSpryker\Zed\Shipment\Persistence;
 
+use Orm\Zed\Shipment\Persistence\SpyShipmentMethodQuery;
 use Orm\Zed\Tax\Persistence\Map\SpyTaxRateTableMap;
 use Orm\Zed\Tax\Persistence\Map\SpyTaxSetTableMap;
 use Spryker\Shared\Tax\TaxConstants;
 use Spryker\Zed\Shipment\Persistence\ShipmentQueryContainer as SprykerShipmentQueryContainer;
 
-/**
- * @method \FondOfSpryker\Zed\Shipment\Persistence\ShipmentPersistenceFactory getFactory()
- */
 class ShipmentQueryContainer extends SprykerShipmentQueryContainer implements ShipmentQueryContainerInterface
 {
     /**
-     * @api
-     *
      * @param int $idShipmentMethod
      * @param string $countryIso2Code
      * @param int $idRegion
      *
      * @return \Orm\Zed\Shipment\Persistence\SpyShipmentMethodQuery
      */
-    public function queryTaxSetByIdShipmentMethodCountryIso2CodeAndRegionId($idShipmentMethod, $countryIso2Code, $idRegion)
-    {
+    public function queryTaxSetByIdShipmentMethodCountryIso2CodeAndRegionId(
+        $idShipmentMethod,
+        $countryIso2Code,
+        $idRegion
+    ): SpyShipmentMethodQuery {
         return $this->getFactory()->createShipmentMethodQuery()
             ->filterByIdShipmentMethod($idShipmentMethod)
             ->useTaxSetQuery()
                 ->useSpyTaxSetTaxQuery()
                     ->useSpyTaxRateQuery()
-                        ->useCountryQuery()->filterByIso2Code($countryIso2Code)->endUse()
+                        ->useCountryQuery()
+                            ->filterByIso2Code($countryIso2Code)
+                        ->endUse()
                         ->_and()
-                        ->useSpyRegionQuery()->filterByIdRegion($idRegion)->endUse()
+                        ->useSpyRegionQuery()
+                            ->filterByIdRegion($idRegion)
+                        ->endUse()
                         ->_or()
                         ->filterByName(TaxConstants::TAX_EXEMPT_PLACEHOLDER)
                     ->endUse()

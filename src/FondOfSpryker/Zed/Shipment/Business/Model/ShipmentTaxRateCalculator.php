@@ -24,20 +24,18 @@ class ShipmentTaxRateCalculator extends SprykerShipmentTaxRateCalculator
     protected $shipmentQueryContainer;
 
     /**
-     * ShipmentTaxRateCalculator constructor.
-     *
-     * @param  \Spryker\Zed\Shipment\Persistence\ShipmentRepositoryInterface  $shipmentRepository
-     * @param  \FondOfSpryker\Zed\Shipment\Persistence\ShipmentQueryContainerInterface  $shipmentQueryContainer
-     * @param  \Spryker\Zed\Shipment\Dependency\ShipmentToTaxInterface  $taxFacade
-     * @param  \Spryker\Service\Shipment\ShipmentServiceInterface  $shipmentService
-     * @param  \FondOfSpryker\Zed\Country\Business\CountryFacadeInterface  $countryFacade
+     * @param \Spryker\Zed\Shipment\Persistence\ShipmentRepositoryInterface $shipmentRepository
+     * @param \Spryker\Zed\Shipment\Persistence\ShipmentQueryContainerInterface $shipmentQueryContainer
+     * @param \Spryker\Zed\Shipment\Dependency\ShipmentToTaxInterface $taxFacade
+     * @param \Spryker\Service\Shipment\ShipmentServiceInterface $shipmentService
+     * @param \FondOfSpryker\Zed\Shipment\Dependency\Facade\ShipmentToCountryFacadeInterface $countryFacade
      */
     public function __construct(
         ShipmentRepositoryInterface $shipmentRepository,
         ShipmentQueryContainerInterface $shipmentQueryContainer,
         ShipmentToTaxInterface $taxFacade,
         ShipmentServiceInterface $shipmentService,
-        CountryFacadeInterface $countryFacade
+        ShipmentToCountryFacadeInterface $countryFacade
     ) {
         parent::__construct($shipmentRepository, $taxFacade, $shipmentService);
         $this->countryFacade = $countryFacade;
@@ -64,7 +62,7 @@ class ShipmentTaxRateCalculator extends SprykerShipmentTaxRateCalculator
                 $idRegion
             )->findOne();
 
-            if ($tax !== null){
+            if ($tax !== null) {
                 $taxTransfer = new TaxSetTransfer();
                 $taxTransfer->fromArray($tax->toArray(), true);
 

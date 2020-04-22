@@ -8,7 +8,7 @@ use Spryker\Zed\Shipment\Business\ShipmentFacadeInterface as SprykerShipmentFaca
 interface ShipmentFacadeInterface extends SprykerShipmentFacadeInterface
 {
     /**
-     * @param  \Generated\Shared\Transfer\CartChangeTransfer  $cartChangeTransfer
+     * @param \Generated\Shared\Transfer\CartChangeTransfer $cartChangeTransfer
      *
      * @return \Generated\Shared\Transfer\CartChangeTransfer
      */

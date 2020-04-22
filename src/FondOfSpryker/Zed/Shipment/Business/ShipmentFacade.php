@@ -13,7 +13,7 @@ use Spryker\Zed\Shipment\Business\ShipmentFacade as SprykerShipmentFacade;
 class ShipmentFacade extends SprykerShipmentFacade implements ShipmentFacadeInterface
 {
     /**
-     * @param  \Generated\Shared\Transfer\CartChangeTransfer  $cartChangeTransfer
+     * @param \Generated\Shared\Transfer\CartChangeTransfer $cartChangeTransfer
      *
      * @return \Generated\Shared\Transfer\CartChangeTransfer
      */

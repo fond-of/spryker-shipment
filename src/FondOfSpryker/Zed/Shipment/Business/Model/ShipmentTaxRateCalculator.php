@@ -14,18 +14,18 @@ use Spryker\Zed\Shipment\Persistence\ShipmentRepositoryInterface;
 class ShipmentTaxRateCalculator extends SprykerShipmentTaxRateCalculator
 {
     /**
-     * @var \FondOfSpryker\Zed\Country\Business\CountryFacadeInterface
+     * @var \FondOfSpryker\Zed\Shipment\Dependency\Facade\ShipmentToCountryFacadeInterface
      */
-    protected $countryFacade;
+    protected ShipmentToCountryFacadeInterface $countryFacade;
 
     /**
      * @var \FondOfSpryker\Zed\Shipment\Persistence\ShipmentQueryContainerInterface
      */
-    protected $shipmentQueryContainer;
+    protected ShipmentQueryContainerInterface $shipmentQueryContainer;
 
     /**
      * @param \Spryker\Zed\Shipment\Persistence\ShipmentRepositoryInterface $shipmentRepository
-     * @param \Spryker\Zed\Shipment\Persistence\ShipmentQueryContainerInterface $shipmentQueryContainer
+     * @param \FondOfSpryker\Zed\Shipment\Persistence\ShipmentQueryContainerInterface $shipmentQueryContainer
      * @param \Spryker\Zed\Shipment\Dependency\ShipmentToTaxInterface $taxFacade
      * @param \Spryker\Service\Shipment\ShipmentServiceInterface $shipmentService
      * @param \FondOfSpryker\Zed\Shipment\Dependency\Facade\ShipmentToCountryFacadeInterface $countryFacade
@@ -38,6 +38,7 @@ class ShipmentTaxRateCalculator extends SprykerShipmentTaxRateCalculator
         ShipmentToCountryFacadeInterface $countryFacade
     ) {
         parent::__construct($shipmentRepository, $taxFacade, $shipmentService);
+
         $this->countryFacade = $countryFacade;
         $this->shipmentQueryContainer = $shipmentQueryContainer;
         $this->taxFacade = $taxFacade;
@@ -59,7 +60,7 @@ class ShipmentTaxRateCalculator extends SprykerShipmentTaxRateCalculator
             $tax = $this->shipmentQueryContainer->queryTaxSetByIdShipmentMethodCountryIso2CodeAndRegionId(
                 $shipmentTransfer->getMethod()->getIdShipmentMethod(),
                 $countryIso2Code,
-                $idRegion
+                $idRegion,
             )->findOne();
 
             if ($tax !== null) {

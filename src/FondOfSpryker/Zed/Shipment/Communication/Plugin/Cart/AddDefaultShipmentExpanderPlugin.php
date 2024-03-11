@@ -9,7 +9,8 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 /**
  * @method \FondOfSpryker\Zed\Shipment\Business\ShipmentFacadeInterface getFacade()
  * @method \Spryker\Zed\Shipment\ShipmentConfig getConfig()
- * @method \FondOfSpryker\Zed\Shipment\Persistence\ShipmentQueryContainerInterface getQueryContainer()
+ * @method \Spryker\Zed\Shipment\Persistence\ShipmentQueryContainerInterface getQueryContainer()
+ * @method \Spryker\Zed\Shipment\Communication\ShipmentCommunicationFactory getFactory()
  */
 class AddDefaultShipmentExpanderPlugin extends AbstractPlugin implements ItemExpanderPluginInterface
 {
@@ -22,7 +23,7 @@ class AddDefaultShipmentExpanderPlugin extends AbstractPlugin implements ItemExp
      *
      * @return \Generated\Shared\Transfer\CartChangeTransfer
      */
-    public function expandItems(CartChangeTransfer $cartChangeTransfer)
+    public function expandItems(CartChangeTransfer $cartChangeTransfer): CartChangeTransfer
     {
         return $this->getFacade()->prepareAndSetEmptyShipment($cartChangeTransfer);
     }

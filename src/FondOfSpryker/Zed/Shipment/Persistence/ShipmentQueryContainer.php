@@ -8,6 +8,9 @@ use Orm\Zed\Tax\Persistence\Map\SpyTaxSetTableMap;
 use Spryker\Shared\Tax\TaxConstants;
 use Spryker\Zed\Shipment\Persistence\ShipmentQueryContainer as SprykerShipmentQueryContainer;
 
+/**
+ * @method \Spryker\Zed\Shipment\Persistence\ShipmentPersistenceFactory getFactory()
+ */
 class ShipmentQueryContainer extends SprykerShipmentQueryContainer implements ShipmentQueryContainerInterface
 {
     /**
@@ -22,6 +25,7 @@ class ShipmentQueryContainer extends SprykerShipmentQueryContainer implements Sh
         $countryIso2Code,
         $idRegion
     ): SpyShipmentMethodQuery {
+        // @phpstan-ignore-next-line
         return $this->getFactory()->createShipmentMethodQuery()
             ->filterByIdShipmentMethod($idShipmentMethod)
             ->useTaxSetQuery()

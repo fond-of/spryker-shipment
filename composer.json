@@ -12,32 +12,23 @@
       "email": "gengjozsef86@gmail.com"
     },
     {
-      "name": "Markus Nörenberg",
-      "email": "noerenberg.markus@gmail.com"
-    },
-    {
       "name": "Pascal Fischer",
       "email": "pascal.fischer@fondof.de"
     }
   ],
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "require": {
-    "php": ">=7.2",
+    "php": ">=8.0",
     "fond-of-spryker/country": "dev-feature/paypal-refund",
-    "spryker/shipment": "^8.0.2"
-
+    "spryker/shipment": "^8.18.0",
+    "spryker/cart-extension": "^4.3"
   },
   "require-dev": {
-    "spryker/code-sniffer": "^0.14.7",
-    "codeception/codeception": "^2.5",
-    "mikey179/vfsstream": "^1.6",
-    "phpro/grumphp": "^0.14",
-    "sebastian/phpcpd": "^4.1",
-    "php-coveralls/php-coveralls": "^2.0",
-    "spryker/kernel": "^3.42.4",
-    "spryker/application": "^3.19.0"
+    "fond-of-codeception/spryker": "*",
+    "spryker/code-sniffer": "*",
+    "spryker-sdk/phpstan-spryker": "*"
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "FondOfSpryker\\": "src/FondOfSpryker/"
@@ -46,7 +37,13 @@
   "autoload-dev": {
     "psr-4": {
       "FondOfSpryker\\": "tests/FondOfSpryker/",
-      "Generated\\": "tests/Generated/"
+      "Generated\\": "src/Generated/",
+      "Orm\\Zed\\": "src/Orm/Zed/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
     }
   }
 }

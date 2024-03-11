@@ -7,7 +7,7 @@ use FondOfSpryker\Zed\Country\Business\CountryFacadeInterface;
 class ShipmentToCountryFacadeBridge implements ShipmentToCountryFacadeInterface
 {
     /**
-     * @var \Spryker\Zed\Country\Business\CountryFacadeInterface
+     * @var \FondOfSpryker\Zed\Country\Business\CountryFacadeInterface
      */
     protected $countryFacade;
 

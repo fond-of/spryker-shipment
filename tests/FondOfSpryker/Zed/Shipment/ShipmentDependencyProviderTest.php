@@ -9,12 +9,15 @@ use Spryker\Shared\Kernel\BundleProxy;
 use Spryker\Zed\Currency\Business\CurrencyFacadeInterface;
 use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\Kernel\Locator;
+use Spryker\Zed\Sales\Business\SalesFacadeInterface;
 use Spryker\Zed\Sales\Persistence\SalesQueryContainerInterface;
 use Spryker\Zed\Shipment\Dependency\Facade\ShipmentToCurrencyInterface;
+use Spryker\Zed\Shipment\Dependency\Facade\ShipmentToSalesFacadeBridge;
 use Spryker\Zed\Shipment\Dependency\Facade\ShipmentToStoreInterface;
 use Spryker\Zed\Shipment\Dependency\ShipmentToTaxInterface;
 use Spryker\Zed\Store\Business\StoreFacadeInterface;
 use Spryker\Zed\Tax\Business\TaxFacadeInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ShipmentDependencyProviderTest extends Unit
 {
@@ -26,42 +29,42 @@ class ShipmentDependencyProviderTest extends Unit
     /**
      * @var \Spryker\Zed\Kernel\Locator|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $locatorMock;
+    protected Locator|MockObject $locatorMock;
 
     /**
      * @var \Spryker\Zed\Kernel\Container|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $containerMock;
+    protected Container|MockObject $containerMock;
 
     /**
      * @var \Spryker\Shared\Kernel\BundleProxy|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $bundleProxyMock;
+    protected BundleProxy|MockObject $bundleProxyMock;
 
     /**
      * @var \Spryker\Zed\Tax\Business\TaxFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $taxFacadeMock;
+    protected TaxFacadeInterface|MockObject $taxFacadeMock;
 
     /**
      * @var \Spryker\Zed\Currency\Business\CurrencyFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $currencyFacadeMock;
+    protected CurrencyFacadeInterface|MockObject $currencyFacadeMock;
 
     /**
      * @var \Spryker\Zed\Store\Business\StoreFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $storeFacadeMock;
+    protected StoreFacadeInterface|MockObject $storeFacadeMock;
 
     /**
      * @var \FondOfSpryker\Zed\Country\Business\CountryFacadeInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $countryFacadeMock;
+    protected CountryFacadeInterface|MockObject $countryFacadeMock;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|\Spryker\Zed\Sales\Persistence\SalesQueryContainerInterface
+     * @var MockObject|\Spryker\Zed\Sales\Persistence\SalesQueryContainerInterface
      */
-    protected $salesQueryContainerMock;
+    protected SalesQueryContainerInterface|MockObject $salesQueryContainerMock;
 
     /**
      * @return void
@@ -121,7 +124,7 @@ class ShipmentDependencyProviderTest extends Unit
 
         $this->bundleProxyMock->expects($this->exactly(5))
             ->method('__call')
-            ->withConsecutive(['queryContainer'], ['facade'], ['facade'], ['facade'], ['facade'])
+            ->withConsecutive(['facade'], ['facade'], ['facade'], ['facade'], ['facade'])
             ->willReturnOnConsecutiveCalls(
                 $this->salesQueryContainerMock,
                 $this->taxFacadeMock,
@@ -133,8 +136,8 @@ class ShipmentDependencyProviderTest extends Unit
         $this->shipmentDependencyProvider->provideBusinessLayerDependencies($this->containerMock);
 
         $this->assertInstanceOf(
-            SalesQueryContainerInterface::class,
-            $this->containerMock[ShipmentDependencyProvider::QUERY_CONTAINER_SALES]
+            ShipmentToSalesFacadeBridge::class,
+            $this->containerMock[ShipmentDependencyProvider::FACADE_SALES]
         );
 
         $this->assertInstanceOf(

@@ -8,6 +8,9 @@ use Spryker\Zed\Shipment\ShipmentDependencyProvider as SprykerShipmentDependency
 
 class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const FACADE_COUNTRY = 'FACADE_COUNTRY';
 
     /**
@@ -18,7 +21,6 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
-
         $container = $this->addCountryFacade($container);
 
         return $container;
